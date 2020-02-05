@@ -5,10 +5,13 @@ const userSchema = mongoose.Schema(
         name: {
             type: String
         },
-        surname: {
+        User: {
             type: String
         },
-        age: {
+        Password: {
+            type: String
+        },
+        Age: {
             type: Number
         }
     }

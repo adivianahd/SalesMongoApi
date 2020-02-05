@@ -4,7 +4,16 @@ class ProductController {
     }
 
     async getProducts(req, res) {
+        const page = req.query.page
+        console.log(page);
+
+
         const products = await this.productService.getProducts()
+
+        return res.json(products)
+    }
+    async freeShippingProducts(req, res) {
+        const products = await this.productService.freeShippingProducts()
 
         return res.json(products)
     }
@@ -21,8 +30,9 @@ class ProductController {
         return res.json(products)
     }
 
-    async update(req, res) {
-        const products = await this.productService.update(req.params.id, req.body)
+    async addDiscount(req, res) {
+        return res.json(await this.productService.addDiscount());
+        const products = await this.productService.addDiscount(req.params.id, req.body)
 
         return res.json(products)
     }

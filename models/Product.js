@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const ProductSchema = mongoose.Schema(
     {
         Name: {
-            type: String
+            type: String,
+            required: true
         },
         Price: {
             type: Number
@@ -19,6 +20,10 @@ const ProductSchema = mongoose.Schema(
         },
         FreeShipping: {
             type: Boolean
+        },
+        created_at: {
+            type: Date,
+            default: Date.now
         },
     }
 )
