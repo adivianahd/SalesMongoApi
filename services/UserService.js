@@ -1,8 +1,14 @@
 const Users = require("./../models/User")
 
 class UserService {
+
+    constructor() {
+        this.limit = 3
+    }
+
     getUsers() {
-        const query = Users.find();
+        const skip = (page - 1) * this.limit
+        const query = Product.find().skip(skip).limit(limit).exec();
 
         return query
     }
@@ -20,6 +26,10 @@ class UserService {
 
         const result = await Promise.all(updates)
         return result.length + " Usuarios actualizados"
+    }
+
+    UserHandler() {
+
     }
 
     getUsersById(id) {

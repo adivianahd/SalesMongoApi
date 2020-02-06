@@ -1,8 +1,14 @@
 const Product = require("./../models/Product")
 
 class ProductService {
-    getProducts() {
-        const query = Product.find();
+
+    constructor() {
+        this.limit = 3
+    }
+
+    getProducts(page) {
+        const skip = (page - 1) * this.limit
+        const query = Product.find().skip(skip).limit(limit).exec();
 
         return query
     }

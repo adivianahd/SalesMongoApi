@@ -24,7 +24,7 @@ router.get('/products/:id', (req, res) => {
 });
 
 router.put('/products/:id', (req, res) => {
-  ProductsInstance.update(req, res);
+  ProductsInstance.addDiscount(req, res);
 });
 
 
