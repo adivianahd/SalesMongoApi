@@ -18,8 +18,8 @@ class ProductService {
         const updates = [];
 
         products.forEach((e) => {
-            if (e.cualquierCosa == null) {
-                e.cualquierCosa = 0;
+            if (e.anything == null) {
+                e.anything = 0;
                 updates.push(Product.findByIdAndUpdate(e.id, e));
             }
         });
@@ -28,25 +28,30 @@ class ProductService {
         return result.length + " Productos actualizados"
     }
 
-    getProductsById(id) {
-        const query = Product.findById(id);
+    async getProductsById(id) {
+        const query = await Product.findById(id);
 
         return query
     }
 
-    save(newProduct) {
+    addNewProduct(newProduct) {
         const product = new Product(newProduct);
         return product.save();
     }
 
-    freeShippingProducts() {
-        const query = Product.find.length({ freeSheppingTrue: true }).exec()
+    async freeShippingProducts() {
+        const query = await Product.find({ freeSheppingTrue: true }).exec()
         return query
 
     }
 
+    async productRelated(category) {
+        const products = await Product.find({ Category: category }).exec();
+        console.log("astrid", "products:", products);
+        return products;
+    }
+
     addDiscount(id, newProduct) {
-        console.log("Test");
 
         return Product.findByIdAndUpdate(id, newProduct);
     }

@@ -13,7 +13,7 @@ class SaleService {
         return query
     }
 
-    save(newSales) {
+    saveNewSales(newSales) {
         const sales = new Users(newSales);
         return sales.save();
     }

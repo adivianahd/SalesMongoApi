@@ -1,27 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-const bcrypt = require('bcrypt-nodejs')
+const ProductController = require('../controllers/ProductController')
+const ProductService = require('../services/ProductService')
+const ProductsInstance = new ProductController(new ProductService())
+
 const UserController = require('../controllers/UserController')
 const UserService = require('../services/UserService')
 const UserInstance = new UserController(new UserService())
+const bcrypt = require('bcrypt-nodejs')
 
 
-router.get('/users', (req, res) => {
-  UserInstance.getUsers(req, res);
-});
 
-router.post('/users', (req, res) => {
-  UserInstance.save(req, res);
-});
-
-router.get('/users/:id', (req, res) => {
-  UserInstance.getUsersById(req, res);
-});
-
-router.get('/users/:handler', (req, res) => {
-  UserInstance.UserHandler(req, res);
-});
 
 router.get('/password', (req, res) => {
   const password = 123
@@ -32,6 +22,34 @@ router.get('/password', (req, res) => {
     password,
     hashedPassword
   )
+});
+
+router.get('/password/:id', (req, res) => {
+
+  const password = '123'
+  const id = req.params.id
+  const hashedPassword = bcryp.hashSync(password)
+
+  const compare = bcrypt.compareSync(id, hashedPassword)
+
+  return res.send(compare)
+
+});
+
+router.get('/users', (req, res) => {
+  UserInstance.getUsers(req, res);
+});
+
+router.post('/users', (req, res) => {
+  UserInstance.addUser(req, res);
+});
+
+router.get('/users/:id', (req, res) => {
+  UserInstance.getUsersById(req, res);
+});
+
+router.get('/users/:handler', (req, res) => {
+  UserInstance.UserHandler(req, res);
 });
 
 router.put('/users/:id', (req, res) => {

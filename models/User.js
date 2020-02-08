@@ -3,17 +3,21 @@ const mongoose = require('mongoose')
 const userSchema = mongoose.Schema(
     {
         name: {
-            type: String
+            type: String,
+            required: true
         },
-        User: {
-            type: String
+        password: {
+            type: String,
+            required: true
         },
-        Password: {
-            type: String
+        handler: {
+            type: String,
+            required: true,
         },
-        Age: {
+        age: {
             type: Number
         }
     }
 )
+
 module.exports = mongoose.model('User', userSchema)

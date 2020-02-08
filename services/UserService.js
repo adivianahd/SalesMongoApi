@@ -38,9 +38,10 @@ class UserService {
         return query
     }
 
-    save(newUsers) {
-        const users = new Users(newUsers);
-        return users.save();
+    addUser(data) {
+        const query = new User(data)
+
+        return query.save()
     }
 
     userUpdate(id, newUsers) {
@@ -49,5 +50,6 @@ class UserService {
         return Users.findByIdAndUpdate(id, newUsers);
     }
 }
+
 
 module.exports = UserService

@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt-nodejs')
+
 class UserController {
     constructor(UserService) {
         this.UserService = UserService
@@ -15,10 +17,19 @@ class UserController {
         return res.json(users)
     }
 
-    async save(req, res) {
-        const users = await this.UserService.save(req.body)
+    async addUser(req, res) {
+        const body = req.body;
 
-        return res.json(users)
+        const newBody = {
+            ...body, password: bcrypt.hashSync(body.password)
+        }
+
+        if (body) {
+            const user = await this.userService.addUser(newBody)
+            return res.sendStatus(200)
+        } else {
+            return res.sendStatus(400)
+        }
     }
 
     async userUpdate(req, res) {

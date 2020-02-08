@@ -4,12 +4,25 @@ class ProductController {
     }
 
     async getProducts(req, res) {
-        let page = req.query.pag ? req.query.page : 1
+        let page = req.query.page ? req.query.page : 1
 
         const products = await this.productService.getProducts(page)
 
         return res.json(products)
     }
+
+    async productRelated(req, res) {
+        const category = req.params.category
+        const productFound = await this.productService.productRelated(category);
+
+
+        if (productFound.length > 0) {
+            return res.json(productFound)
+        }
+
+        return res.sendStatus(404)
+    }
+
     async freeShippingProducts(req, res) {
         const products = await this.productService.freeShippingProducts()
 
@@ -22,14 +35,17 @@ class ProductController {
         return res.json(products)
     }
 
-    async save(req, res) {
-        const products = await this.productService.save(req.body)
+    async mostSellers(req, res) {
+
+    }
+
+    async addNewProduct(req, res) {
+        const products = await this.productService.addNewProduct(req.body)
 
         return res.json(products)
     }
 
     async addDiscount(req, res) {
-        return res.json(await this.productService.addDiscount());
         const products = await this.productService.addDiscount(req.params.id, req.body)
 
         return res.json(products)
