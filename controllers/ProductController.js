@@ -4,8 +4,7 @@ class ProductController {
     }
 
     async getProducts(req, res) {
-        let page = req.query.page ? req.query.page : 1
-
+        const page = req.query.page ? req.query.page : 1
         const products = await this.productService.getProducts(page)
 
         return res.json(products)

@@ -8,7 +8,7 @@ class ProductService {
 
     getProducts(page) {
         const skip = (page - 1) * this.limit
-        const query = Product.find().skip(skip).limit(limit).exec();
+        const query = Product.find().skip(skip).limit(this.limit).exec();
 
         return query
     }
