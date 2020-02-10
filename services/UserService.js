@@ -6,9 +6,9 @@ class UserService {
         this.limit = 3
     }
 
-    getUsers() {
+    getUsers(page) {
         const skip = (page - 1) * this.limit
-        const query = Product.find().skip(skip).limit(limit).exec();
+        const query = Users.find().skip(skip).limit(this.limit).exec();
 
         return query
     }
@@ -39,7 +39,7 @@ class UserService {
     }
 
     addUser(data) {
-        const query = new User(data)
+        const query = new Users(data)
 
         return query.save()
     }

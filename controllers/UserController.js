@@ -6,9 +6,17 @@ class UserController {
     }
 
     async getUsers(req, res) {
-        const users = await this.UserService.getUsers()
+        const page = req.query.page ? req.query.page : 1;
+        const users = await this.UserService.getUsers(page)
 
         return res.json(users)
+    }
+
+    async login(req, res) {
+        const user = await this.UserService.getUsersById(req.body.id);
+        const compare = bcrypt.compareSync(req.body.password, user.password);
+
+        return res.send(compare)
     }
 
     async getUsersById(req, res) {
@@ -21,11 +29,12 @@ class UserController {
         const body = req.body;
 
         const newBody = {
-            ...body, password: bcrypt.hashSync(body.password)
+            ...body,
+            password: bcrypt.hashSync(body.password)
         }
 
         if (body) {
-            const user = await this.userService.addUser(newBody)
+            const user = await this.UserService.addUser(newBody)
             return res.sendStatus(200)
         } else {
             return res.sendStatus(400)

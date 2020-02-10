@@ -23,6 +23,8 @@ router.get('/sales/:id', (req, res) => {
     SaleInstance.getSalesById(req, res);
 });
 
-
+router.get('/sales/top', (req, res) => {
+    ProductsInstance.mostSell(req, res);
+});
 
 module.exports = router;

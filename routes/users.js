@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const ProductController = require('../controllers/ProductController')
-const ProductService = require('../services/ProductService')
-const ProductsInstance = new ProductController(new ProductService())
-
 const UserController = require('../controllers/UserController')
 const UserService = require('../services/UserService')
 const UserInstance = new UserController(new UserService())
@@ -25,15 +21,18 @@ router.get('/password', (req, res) => {
 });
 
 router.get('/password/:id', (req, res) => {
-
   const password = '123'
+  const hashedPassword = bcrypt.hashSync(password)
   const id = req.params.id
-  const hashedPassword = bcryp.hashSync(password)
 
   const compare = bcrypt.compareSync(id, hashedPassword)
 
   return res.send(compare)
 
+});
+
+router.post('/users/login', (req, res) => {
+  UserInstance.login(req, res);
 });
 
 router.get('/users', (req, res) => {
