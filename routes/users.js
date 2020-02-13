@@ -6,6 +6,31 @@ const UserService = require('../services/UserService')
 const UserInstance = new UserController(new UserService())
 const bcrypt = require('bcrypt-nodejs')
 
+const passport = require("../authMiddleware")
+
+async function isAdmin(req, res, next) {
+  const id = req.body.userId
+
+  if (!id) {
+    return res.sendStatus(401)
+  }
+
+  const user = await new UserService().getUsersById(id)
+
+  if (!user) {
+    return res.sendStatus(401)
+  }
+
+  if (!user || !user.isAdmin) {
+    return res.sendStatus(401)
+  }
+
+  next()
+}
+
+router.post("/users/login", passport.authenticate("local"), function (req, res) {
+  return res.json(req.user);
+});
 
 
 

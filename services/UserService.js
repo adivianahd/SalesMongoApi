@@ -28,9 +28,14 @@ class UserService {
         return result.length + " Usuarios actualizados"
     }
 
-    UserHandler() {
-
+    async findByUserName(username) {
+        const user = await Users.find({ name: username }).limit(1).exec();
+        if (user.length) {
+            return user[0];
+        }
+        return null;
     }
+
 
     getUsersById(id) {
         const query = Users.findById(id);
