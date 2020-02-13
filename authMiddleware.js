@@ -10,7 +10,7 @@ async function strategy(username, password, cb) {
     if (user && user.password) {
         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
         if (isPasswordCorrect) {
-            return cb(null, { user })
+            return cb(null, user)
         }
 
         return cb("La contraseña es incorrecta");
@@ -24,6 +24,6 @@ const formParams = { usernameField: "username", passwordField: "password" };
 
 passport.use(new Strategy(formParams, strategy));
 passport.serializeUser((user, cb) => cb(null, user));
-
+passport.deserializeUser((user, cb) => cb(null, user));
 
 module.exports = passport;
