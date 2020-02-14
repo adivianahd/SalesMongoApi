@@ -56,10 +56,6 @@ router.get('/password/:id', (req, res) => {
 
 });
 
-router.post('/users/login', (req, res) => {
-  UserInstance.login(req, res);
-});
-
 router.get('/users', (req, res) => {
   UserInstance.getUsers(req, res);
 });

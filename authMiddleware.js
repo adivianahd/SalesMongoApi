@@ -5,6 +5,8 @@ const UserService = require("./services/UserService");
 
 const userService = new UserService();
 
+const formParams = { usernameField: "username", passwordField: "password" };
+
 async function strategy(username, password, cb) {
     const user = await userService.findByUserName(username);
     if (user && user.password) {
@@ -18,9 +20,6 @@ async function strategy(username, password, cb) {
 
     return cb("Usuario no existe")
 }
-
-const formParams = { usernameField: "username", passwordField: "password" };
-
 
 passport.use(new Strategy(formParams, strategy));
 passport.serializeUser((user, cb) => cb(null, user));
