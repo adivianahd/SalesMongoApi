@@ -1,20 +1,20 @@
-const Users = require("./../models/User")
+const Users = require("./../models/User");
 
 class UserService {
 
     constructor() {
-        this.limit = 3
+        this.limit = 3;
     }
 
     getUsers(page) {
-        const skip = (page - 1) * this.limit
+        const skip = (page - 1) * this.limit;
         const query = Users.find().skip(skip).limit(this.limit).exec();
 
-        return query
+        return query;
     }
 
     async discountUpdate() {
-        const Users = await Users.find();
+        const users = await Users.find();
         const updates = [];
 
         users.forEach((e) => {
@@ -24,8 +24,8 @@ class UserService {
             }
         });
 
-        const result = await Promise.all(updates)
-        return result.length + " Usuarios actualizados"
+        const result = await Promise.all(updates);
+        return result.length + " Usuarios actualizados";
     }
 
     async findByUserName(username) {
@@ -40,13 +40,13 @@ class UserService {
     getUsersById(id) {
         const query = Users.findById(id);
 
-        return query
+        return query;
     }
 
     addUser(data) {
-        const query = new Users(data)
+        const query = new Users(data);
 
-        return query.save()
+        return query.save();
     }
 
     userUpdate(id, newUsers) {
@@ -57,4 +57,4 @@ class UserService {
 }
 
 
-module.exports = UserService
+module.exports = UserService;

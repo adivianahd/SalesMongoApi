@@ -1,16 +1,16 @@
-const Product = require("./../models/Product")
+const Product = require("./../models/Product");
 
 class ProductService {
 
     constructor() {
-        this.limit = 3
+        this.limit = 3;
     }
 
     getProducts(page) {
-        const skip = (page - 1) * this.limit
+        const skip = (page - 1) * this.limit;
         const query = Product.find().skip(skip).limit(this.limit).exec();
 
-        return query
+        return query;
     }
 
     async discountUpdate() {
@@ -24,14 +24,14 @@ class ProductService {
             }
         });
 
-        const result = await Promise.all(updates)
-        return result.length + " Productos actualizados"
+        const result = await Promise.all(updates);
+        return result.length + " Productos actualizados";
     }
 
     async getProductsById(id) {
         const query = await Product.findById(id);
 
-        return query
+        return query;
     }
 
     addNewProduct(newProduct) {
@@ -40,8 +40,8 @@ class ProductService {
     }
 
     async freeShippingProducts() {
-        const query = await Product.find({ freeSheppingTrue: true }).exec()
-        return query
+        const query = await Product.find({ freeSheppingTrue: true }).exec();
+        return query;
 
     }
 
@@ -57,4 +57,4 @@ class ProductService {
     }
 }
 
-module.exports = ProductService
+module.exports = ProductService;

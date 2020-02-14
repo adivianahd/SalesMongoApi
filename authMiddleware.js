@@ -1,6 +1,6 @@
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
-const bcrypt = require('bcrypt-nodejs')
+const bcrypt = require("bcrypt-nodejs");
 const UserService = require("./services/UserService");
 
 const userService = new UserService();
@@ -12,13 +12,13 @@ async function strategy(username, password, cb) {
     if (user && user.password) {
         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
         if (isPasswordCorrect) {
-            return cb(null, user)
+            return cb(null, user);
         }
 
         return cb("La contraseña es incorrecta");
     }
 
-    return cb("Usuario no existe")
+    return cb("Usuario no existe");
 }
 
 passport.use(new Strategy(formParams, strategy));

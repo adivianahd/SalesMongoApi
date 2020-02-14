@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema(
     {
@@ -26,6 +26,6 @@ const ProductSchema = mongoose.Schema(
             default: Date.now
         },
     }
-)
+);
 
-module.exports = mongoose.model('product', ProductSchema);
+module.exports = mongoose.model("product", ProductSchema);

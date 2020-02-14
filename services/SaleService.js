@@ -1,20 +1,20 @@
-const Sales = require("./../models/Sale")
+const Sales = require("./../models/Sale");
 
 class SaleService {
 
     constructor() {
-        this.limit = 3
+        this.limit = 3;
     }
 
-    getSales() {
-        const skip = (page - 1) * this.limit
-        const query = Product.find().skip(skip).limit(limit).exec();
+    getSales(page = 1) {
+        const skip = (page - 1) * this.limit;
+        const query = Sales.find().skip(skip).limit(this.limit).exec();
 
-        return query
+        return query;
     }
 
     saveNewSales(newSales) {
-        const sales = new Users(newSales);
+        const sales = new Sales(newSales);
         return sales.save();
     }
 
@@ -22,15 +22,15 @@ class SaleService {
     getSalesById(id) {
         const query = Sales.findById(id);
 
-        return query
+        return query;
     }
 
     getSalesByUser(id) {
         const query = Sales.findById(id);
 
-        return query
+        return query;
     }
 
 }
 
-module.exports = SaleService
+module.exports = SaleService;
