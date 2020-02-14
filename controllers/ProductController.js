@@ -1,49 +1,49 @@
 class ProductController {
-    constructor(productService) {
-        this.productService = productService;
+  constructor(productService) {
+    this.productService = productService;
+  }
+
+  async getProducts(req, res) {
+    const page = req.query.page ? req.query.page : 1;
+    const products = await this.productService.getProducts(page);
+
+    return res.json(products);
+  }
+
+  async productRelated(req, res) {
+    const category = req.params.category;
+    const productFound = await this.productService.productRelated(category);
+
+
+    if (productFound.length > 0) {
+      return res.json(productFound);
     }
 
-    async getProducts(req, res) {
-        const page = req.query.page ? req.query.page : 1;
-        const products = await this.productService.getProducts(page);
+    return res.sendStatus(404);
+  }
 
-        return res.json(products);
-    }
+  async freeShippingProducts(req, res) {
+    const products = await this.productService.freeShippingProducts();
 
-    async productRelated(req, res) {
-        const category = req.params.category;
-        const productFound = await this.productService.productRelated(category);
+    return res.json(products);
+  }
 
+  async getProductsById(req, res) {
+    const products = await this.productService.getProductsById(req.params.id);
 
-        if (productFound.length > 0) {
-            return res.json(productFound);
-        }
+    return res.json(products);
+  }
 
-        return res.sendStatus(404);
-    }
+  async addNewProduct(req, res) {
+    const products = await this.productService.addNewProduct(req.body);
 
-    async freeShippingProducts(req, res) {
-        const products = await this.productService.freeShippingProducts();
+    return res.json(products);
+  }
 
-        return res.json(products);
-    }
+  async addDiscount(req, res) {
+    const products = await this.productService.addDiscount(req.params.id, req.body);
 
-    async getProductsById(req, res) {
-        const products = await this.productService.getProductsById(req.params.id);
-
-        return res.json(products);
-    }
-
-    async addNewProduct(req, res) {
-        const products = await this.productService.addNewProduct(req.body);
-
-        return res.json(products);
-    }
-
-    async addDiscount(req, res) {
-        const products = await this.productService.addDiscount(req.params.id, req.body);
-
-        return res.json(products);
-    }
+    return res.json(products);
+  }
 }
 module.exports = ProductController; 

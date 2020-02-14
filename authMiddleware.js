@@ -8,17 +8,17 @@ const userService = new UserService();
 const formParams = { usernameField: "username", passwordField: "password" };
 
 async function strategy(username, password, cb) {
-    const user = await userService.findByUserName(username);
-    if (user && user.password) {
-        const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-        if (isPasswordCorrect) {
-            return cb(null, user);
-        }
-
-        return cb("La contraseña es incorrecta");
+  const user = await userService.findByUserName(username);
+  if (user && user.password) {
+    const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+    if (isPasswordCorrect) {
+      return cb(null, user);
     }
 
-    return cb("Usuario no existe");
+    return cb("La contraseña es incorrecta");
+  }
+
+  return cb("Usuario no existe");
 }
 
 passport.use(new Strategy(formParams, strategy));

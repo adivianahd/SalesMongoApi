@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const saleSchema = mongoose.Schema(
-    {
-        Product: {},
+  {
+    Product: {},
 
-        User: {
-            type: String
-        },
+    User: {
+      type: String
+    },
 
-        Date: {
-            type: Date,
-            default: Date.now
-        }
+    Date: {
+      type: Date,
+      default: Date.now
     }
+  }
 );
 module.exports = mongoose.model("Sale", saleSchema);

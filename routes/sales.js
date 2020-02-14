@@ -8,19 +8,19 @@ const SaleInstance = new SaleController(new SaleService());
 
 
 router.get("/sales", (req, res) => {
-    SaleInstance.getUsers(req, res);
+  SaleInstance.getUsers(req, res);
 });
 
 router.post("/sales", (req, res) => {
-    SaleInstance.save(req, res);
+  SaleInstance.save(req, res);
 });
 
 router.get("/sales/:users", (req, res) => {
-    SaleInstance.getSalesByUser(req, res);
+  SaleInstance.getSalesByUser(req, res);
 });
 
 router.get("/sales/:id", (req, res) => {
-    SaleInstance.getSalesById(req, res);
+  SaleInstance.getSalesById(req, res);
 });
 
 module.exports = router;
